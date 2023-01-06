@@ -1,5 +1,7 @@
 ﻿using Utility;
 using Google.Cloud.Firestore;
+using System.Security.Principal;
+using System.Diagnostics;
 
 namespace Account
 {
@@ -48,6 +50,50 @@ namespace Account
             {
                 msg = "Create account unsuccessful";
                 return false;
+            }
+        }
+
+        public void CreateTransaction(TransactionModel _transactionData,out string msg)
+        {
+            try
+            {
+                CollectionReference collection = _db.Collection("transaction");
+                Dictionary<string, object> transaction = new Dictionary<string, object>()
+                {
+                        { "type",_transactionData.Type},
+                        {"amount",_transactionData.Amount},                   
+                        {"created", FieldValue.ServerTimestamp}
+
+                };
+
+                switch (_transactionData.Type)
+                {
+                    case (int)TransactionType.Type.DEPOSIT:
+                        transaction.Add("destination", _transactionData.Destination);
+                        transaction.Add("fee", _transactionData.Fee);
+                        break;
+                    case (int)TransactionType.Type.WITHDRAW:
+                        transaction.Add("origin", _transactionData.Origin);
+                        break;
+                    case (int)TransactionType.Type.TRANSFER:
+                        transaction.Add("destination", _transactionData.Destination);
+                        transaction.Add("origin", _transactionData.Origin);
+                        break;
+                    case (int)TransactionType.Type.ADJUST:
+                        transaction.Add("destination", _transactionData.Destination);
+                        break;
+                    default:
+                        break;
+                }
+
+                collection.AddAsync(transaction);
+                msg = "Transaction successfully created";
+                //return true;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.ToString();
+               //return false;
             }
         }
     }
