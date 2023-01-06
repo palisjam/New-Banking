@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Account\**" />
     <Compile Remove="IBAN\**" />
+    <Compile Remove="Utility\**" />
+    <EmbeddedResource Remove="Account\**" />
     <EmbeddedResource Remove="IBAN\**" />
+    <EmbeddedResource Remove="Utility\**" />
+    <None Remove="Account\**" />
     <None Remove="IBAN\**" />
+    <None Remove="Utility\**" />
   </ItemGroup>
 
   <ItemGroup>

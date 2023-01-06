@@ -3,15 +3,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Security.Policy;
 using System.Windows.Forms;
-//using Google.Cloud.Firestore;
-
 using IBAN;
 
 namespace WindowsBanking
 {
     public partial class CreateAccount : Form
     {
-        //private FirestoreDb _db;
         private IBANController _iban = new IBANController();
         public CreateAccount()
         {
@@ -29,8 +26,7 @@ namespace WindowsBanking
             //CreateAccount(out msg);
             MessageBox.Show(msg);
         }
-        /*
-        */
+
         private void button1_Click(object sender, EventArgs e)
         {
             txtIBAN.Text = _iban.GetIBAN();
