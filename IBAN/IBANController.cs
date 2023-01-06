@@ -10,19 +10,26 @@ namespace IBAN
         private WebDriverWait wait;
         private IWebDriver driver;
         public IBANController() {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments(new List<string>() {
+            try
+            {
+                var chromeOptions = new ChromeOptions();
+                chromeOptions.AddArguments(new List<string>() {
                 "--silent-launch",
                 "--no-startup-window",
                 "no-sandbox",
                 "headless",});
 
-            var chromeDriverService = ChromeDriverService.CreateDefaultService();
-            chromeDriverService.HideCommandPromptWindow = true;
+                var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                chromeDriverService.HideCommandPromptWindow = true;
 
-            driver = new ChromeDriver(chromeDriverService, chromeOptions);
-            driver.Url = "http://randomiban.com/?country=Netherlands";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(0));
+                driver = new ChromeDriver(chromeDriverService, chromeOptions);
+                driver.Url = "http://randomiban.com/?country=Netherlands";
+                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(0));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
         public string GetIBAN()
         {

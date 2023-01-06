@@ -38,13 +38,13 @@
             this.txtGivenName = new System.Windows.Forms.TextBox();
             this.txtFamilyName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCreateAccount
             // 
-            this.btnCreateAccount.Location = new System.Drawing.Point(160, 359);
+            this.btnCreateAccount.Location = new System.Drawing.Point(202, 319);
             this.btnCreateAccount.Name = "btnCreateAccount";
             this.btnCreateAccount.Size = new System.Drawing.Size(157, 29);
             this.btnCreateAccount.TabIndex = 0;
@@ -132,22 +132,22 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "IBAN";
             // 
-            // button1
+            // btnRefresh
             // 
-            this.button1.Location = new System.Drawing.Point(401, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnRefresh.Location = new System.Drawing.Point(401, 29);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(88, 29);
+            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // CreateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(560, 392);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtIBAN);
             this.Controls.Add(this.label4);
@@ -174,6 +174,6 @@
         private TextBox txtGivenName;
         private TextBox txtFamilyName;
         private Label label4;
-        private Button button1;
+        private Button btnRefresh;
     }
 }

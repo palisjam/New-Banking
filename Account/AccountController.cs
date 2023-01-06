@@ -20,20 +20,29 @@ namespace Account
             }
         }
 
-        private bool CreateAccount(AccountModel _account, out string msg)
+        public bool CreateAccount(AccountModel _account, out string msg)
         {
             if (!String.IsNullOrEmpty(_account.IBAN))
             {
-                DocumentReference collection = _db.Collection("account").Document(_account.IBAN);
-                Dictionary<string, object> account = new Dictionary<string, object>()
+                try
                 {
-                    { "FamilyName",_account.FamilyName},
-                    {"GivenName",_account.GivenName},
-                    {"email",_account.Email}
-                };
-                collection.SetAsync(account);
-                msg = "Account successfully created";
-                return true;
+                    DocumentReference collection = _db.Collection("account").Document(_account.IBAN);
+                    Dictionary<string, object> account = new Dictionary<string, object>()
+                    {
+                        { "FamilyName",_account.FamilyName},
+                        {"GivenName",_account.GivenName},
+                        {"email",_account.Email},
+                        {"created", FieldValue.ServerTimestamp }
+
+                    };
+                    collection.SetAsync(account);
+                    msg = "Account successfully created";
+                    return true;
+                }catch(Exception ex)
+                {
+                    msg = ex.ToString();
+                    return false;
+                }
             }
             else
             {
