@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsBanking", "WindowsBa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IBAN", "IBAN\IBAN.csproj", "{34A61B14-9392-49C0-8451-8F19E274AE20}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account", "Account\Account.csproj", "{7CF7DF5B-F40D-425F-AEE9-FA3A3FF58CAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{505A4E94-D3EE-4502-A45C-8CB6C794D5CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{34A61B14-9392-49C0-8451-8F19E274AE20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34A61B14-9392-49C0-8451-8F19E274AE20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34A61B14-9392-49C0-8451-8F19E274AE20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF7DF5B-F40D-425F-AEE9-FA3A3FF58CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF7DF5B-F40D-425F-AEE9-FA3A3FF58CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF7DF5B-F40D-425F-AEE9-FA3A3FF58CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF7DF5B-F40D-425F-AEE9-FA3A3FF58CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505A4E94-D3EE-4502-A45C-8CB6C794D5CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505A4E94-D3EE-4502-A45C-8CB6C794D5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505A4E94-D3EE-4502-A45C-8CB6C794D5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505A4E94-D3EE-4502-A45C-8CB6C794D5CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,10 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Cloud.Firestore" Version="3.0.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.7.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="108.0.5359.7100" />
+    <ProjectReference Include="Account\Account.csproj" />
+    <ProjectReference Include="IBAN\IBAN.csproj" />
   </ItemGroup>
 
 </Project>

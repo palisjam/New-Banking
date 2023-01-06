@@ -1,6 +1,6 @@
 ﻿namespace WindowsBanking
 {
-    partial class Form1
+    partial class CreateAccount
     {
         /// <summary>
         ///  Required designer variable.
@@ -37,6 +37,8 @@
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.txtGivenName = new System.Windows.Forms.TextBox();
             this.txtFamilyName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +54,7 @@
             // 
             // txtIBAN
             // 
-            this.txtIBAN.Location = new System.Drawing.Point(35, 25);
+            this.txtIBAN.Location = new System.Drawing.Point(160, 29);
             this.txtIBAN.Name = "txtIBAN";
             this.txtIBAN.ReadOnly = true;
             this.txtIBAN.Size = new System.Drawing.Size(235, 27);
@@ -68,7 +70,7 @@
             this.groupBox1.Controls.Add(this.txtFamilyName);
             this.groupBox1.Location = new System.Drawing.Point(35, 75);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(440, 261);
+            this.groupBox1.Size = new System.Drawing.Size(490, 203);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Customer data";
@@ -104,32 +106,53 @@
             // 
             this.txtEmailAddress.Location = new System.Drawing.Point(125, 151);
             this.txtEmailAddress.Name = "txtEmailAddress";
-            this.txtEmailAddress.Size = new System.Drawing.Size(291, 27);
+            this.txtEmailAddress.Size = new System.Drawing.Size(329, 27);
             this.txtEmailAddress.TabIndex = 2;
             // 
             // txtGivenName
             // 
             this.txtGivenName.Location = new System.Drawing.Point(125, 100);
             this.txtGivenName.Name = "txtGivenName";
-            this.txtGivenName.Size = new System.Drawing.Size(291, 27);
+            this.txtGivenName.Size = new System.Drawing.Size(329, 27);
             this.txtGivenName.TabIndex = 1;
             // 
             // txtFamilyName
             // 
             this.txtFamilyName.Location = new System.Drawing.Point(125, 49);
             this.txtFamilyName.Name = "txtFamilyName";
-            this.txtFamilyName.Size = new System.Drawing.Size(291, 27);
+            this.txtFamilyName.Size = new System.Drawing.Size(329, 27);
             this.txtFamilyName.TabIndex = 0;
             // 
-            // Form1
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(111, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "IBAN";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(401, 29);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 29);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // CreateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtIBAN);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCreateAccount);
-            this.Name = "Form1";
+            this.Name = "CreateAccount";
             this.Text = "New Banking";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -150,5 +173,7 @@
         private TextBox txtEmailAddress;
         private TextBox txtGivenName;
         private TextBox txtFamilyName;
+        private Label label4;
+        private Button button1;
     }
 }
