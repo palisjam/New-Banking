@@ -8,10 +8,13 @@ namespace Account
     public class AccountController
     {
         private FirestoreDb _db;
-        public AccountController()
+        private double Fee = 0.001;
+
+        public AccountController(double _fee = 0)
         {
             try
             {
+                if (_fee > 0){ Fee = _fee; }
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"banking-70155-firebase-adminsdk-3l81z-63572a5941.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 _db = FirestoreDb.Create("banking-70155");
@@ -22,22 +25,15 @@ namespace Account
             }
         }
 
-        public bool CreateAccount(AccountModel _account, out string msg)
+        public bool CreateAccount(string iban, AccountModel _account, out string msg)
         {
-            if (!String.IsNullOrEmpty(_account.IBAN))
+            if (!String.IsNullOrEmpty(iban))
             {
                 try
                 {
-                    DocumentReference collection = _db.Collection("account").Document(_account.IBAN);
-                    Dictionary<string, object> account = new Dictionary<string, object>()
-                    {
-                        { "FamilyName",_account.FamilyName},
-                        {"GivenName",_account.GivenName},
-                        {"email",_account.Email},
-                        {"created", FieldValue.ServerTimestamp }
-
-                    };
-                    collection.SetAsync(account);
+                    DocumentReference collection = _db.Collection("account").Document(iban);
+                    _account.Created = FieldValue.ServerTimestamp;
+                    collection.SetAsync(_account);
                     msg = "Account successfully created";
                     return true;
                 }catch(Exception ex)
@@ -58,42 +54,49 @@ namespace Account
             try
             {
                 CollectionReference collection = _db.Collection("transaction");
-                Dictionary<string, object> transaction = new Dictionary<string, object>()
-                {
-                        { "type",_transactionData.Type},
-                        {"amount",_transactionData.Amount},                   
-                        {"created", FieldValue.ServerTimestamp}
 
-                };
-
-                switch (_transactionData.Type)
+                if(_transactionData.Type == (int)TransactionType.Type.DEPOSIT)
                 {
-                    case (int)TransactionType.Type.DEPOSIT:
-                        transaction.Add("destination", _transactionData.Destination);
-                        transaction.Add("fee", _transactionData.Fee);
-                        break;
-                    case (int)TransactionType.Type.WITHDRAW:
-                        transaction.Add("origin", _transactionData.Origin);
-                        break;
-                    case (int)TransactionType.Type.TRANSFER:
-                        transaction.Add("destination", _transactionData.Destination);
-                        transaction.Add("origin", _transactionData.Origin);
-                        break;
-                    case (int)TransactionType.Type.ADJUST:
-                        transaction.Add("destination", _transactionData.Destination);
-                        break;
-                    default:
-                        break;
+                    _transactionData.Fee = GetFee(_transactionData.Amount);
+                    _transactionData.Amount = _transactionData.Amount - _transactionData.Fee;
                 }
-
-                collection.AddAsync(transaction);
+                collection.AddAsync(_transactionData);
                 msg = "Transaction successfully created";
-                //return true;
             }
             catch (Exception ex)
             {
                 msg = ex.ToString();
-               //return false;
+            }
+        }
+
+        public double GetFee(double amount)
+        {
+            return Math.Round(amount * Fee, 2);
+
+        }
+
+        public async Task<AccountModel> GetAccount(string _iban)
+        {
+            AccountModel _account= new AccountModel();
+            DocumentReference docRef = _db.Collection("account").Document(ValidateIBAN(_iban));
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists)
+            {
+                Dictionary<string, object> accDic = snapshot.ToDictionary();
+                _account.Set(accDic["FamilyName"].ToString(), accDic["GivenName"].ToString(), accDic["email"].ToString());
+            }
+            return _account;
+        }
+
+        public string ValidateIBAN(string _iban)
+        {
+            if(_iban.Length<18|| String.IsNullOrEmpty(_iban))
+            {
+                return "0";
+            }
+            else
+            {
+                return _iban;
             }
         }
     }

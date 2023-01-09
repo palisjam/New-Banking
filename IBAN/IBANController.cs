@@ -46,6 +46,10 @@ namespace IBAN
                 return "";
             }
         }
+        public void Dispose()
+        {
+            driver.Dispose();
+        }
 
     }
 }

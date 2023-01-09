@@ -8,11 +8,12 @@ using Account;
 
 namespace WindowsBanking
 {
-    public partial class CreateAccount : Form
+    public partial class frmCreateAccount : Form
     {
         private IBANController _iban = new IBANController();
         private AccountController _accountController = new AccountController();
-        public CreateAccount()
+
+        public frmCreateAccount()
         {
             InitializeComponent();
         }
@@ -26,16 +27,26 @@ namespace WindowsBanking
         {
             string msg = "";
             AccountModel _account = new AccountModel();
-            _account.Set(txtIBAN.Text,txtFamilyName.Text,txtGivenName.Text,txtEmailAddress.Text);
+            _account.Set(txtFamilyName.Text,txtGivenName.Text,txtEmailAddress.Text);
             
-            _accountController.CreateAccount(_account, out msg);
+            _accountController.CreateAccount(txtIBAN.Text,_account, out msg);
             MessageBox.Show(msg);
             txtIBAN.Text = _iban.GetIBAN();
+            Clear();
+            this.Hide();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             txtIBAN.Text = _iban.GetIBAN();
         }
+
+        private void Clear()
+        {
+            txtFamilyName.Text = null;
+            txtGivenName.Text = null;
+            txtEmailAddress.Text = null;
+        }
+
     }
 }

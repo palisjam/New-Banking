@@ -1,16 +1,21 @@
-﻿namespace Account
+﻿using Google.Cloud.Firestore;
+
+namespace Account
 {
+    [FirestoreData]
     public class AccountModel
     {
-        public string IBAN { get; set; }
+        [FirestoreProperty]
         public string FamilyName { get; set; }
+        [FirestoreProperty]
         public string GivenName { get; set; }
+        [FirestoreProperty]
         public string Email { get; set; }
-        public string Created { get; set; }
+        [FirestoreProperty]
+        public object Created { get; set; }
 
-        public AccountModel Set(string iban, string famalyName, string givenName, string email)
+        public AccountModel Set(string famalyName, string givenName, string email)
         {
-            this.IBAN = iban;
             this.FamilyName = famalyName;
             this.GivenName = givenName;
             this.Email = email;
@@ -18,13 +23,20 @@
         }
     }
 
+    [FirestoreData]
     public class TransactionModel
     {
-        public string Origin { get; set;}
-        public string Destination { get; set;}
-        public string Amount { get; set;}
-        public string Fee { get; set;}
-        public int Type { get; set;}
+        [FirestoreProperty]
+        public string Origin { get; set; }
+        [FirestoreProperty]
+        public string Destination { get; set; }
+        [FirestoreProperty]
+        public double Amount { get; set; }
+        [FirestoreProperty]
+        public double Fee { get; set; }
+        [FirestoreProperty]
+        public int Type { get; set; }
+        [FirestoreProperty]
         public string Created { get; set;}
     }
 }

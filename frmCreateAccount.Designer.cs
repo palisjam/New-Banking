@@ -1,6 +1,6 @@
 ﻿namespace WindowsBanking
 {
-    partial class CreateAccount
+    partial class frmCreateAccount
     {
         /// <summary>
         ///  Required designer variable.
@@ -73,7 +73,7 @@
             this.groupBox1.Size = new System.Drawing.Size(490, 203);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Customer data";
+            this.groupBox1.Text = "Customer Information";
             // 
             // label3
             // 
@@ -142,7 +142,7 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // CreateAccount
+            // frmCreateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.txtIBAN);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCreateAccount);
-            this.Name = "CreateAccount";
+            this.Name = "frmCreateAccount";
             this.Text = "New Banking";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
