@@ -25,15 +25,22 @@ namespace WindowsBanking
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            string msg = "";
-            AccountModel _account = new AccountModel();
-            _account.Set(txtFamilyName.Text,txtGivenName.Text,txtEmailAddress.Text);
-            
-            _accountController.CreateAccount(txtIBAN.Text,_account, out msg);
-            MessageBox.Show(msg);
-            txtIBAN.Text = _iban.GetIBAN();
-            Clear();
-            this.Hide();
+            if(!string.IsNullOrEmpty(txtIBAN.Text)&& !string.IsNullOrEmpty(txtFamilyName.Text)&& !string.IsNullOrEmpty(txtGivenName.Text)&& !string.IsNullOrEmpty(txtEmailAddress.Text))
+            {
+                string msg = "";
+                AccountModel _account = new AccountModel();
+                _account.Set(txtFamilyName.Text, txtGivenName.Text, txtEmailAddress.Text);
+
+                _accountController.CreateAccount(txtIBAN.Text, _account, out msg);
+                MessageBox.Show(msg);
+                txtIBAN.Text = _iban.GetIBAN();
+                Clear();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Please fill all data");
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

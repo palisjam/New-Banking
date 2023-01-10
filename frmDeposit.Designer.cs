@@ -48,6 +48,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnCalFee = new System.Windows.Forms.Button();
+            this.labelIBANAlert = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,6 +148,7 @@
             // 
             this.txtGrossDeposit.Location = new System.Drawing.Point(156, 285);
             this.txtGrossDeposit.Name = "txtGrossDeposit";
+            this.txtGrossDeposit.ReadOnly = true;
             this.txtGrossDeposit.Size = new System.Drawing.Size(369, 27);
             this.txtGrossDeposit.TabIndex = 4;
             this.txtGrossDeposit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -233,11 +235,23 @@
             this.btnCalFee.UseVisualStyleBackColor = true;
             this.btnCalFee.Click += new System.EventHandler(this.btnCalFee_Click);
             // 
+            // labelIBANAlert
+            // 
+            this.labelIBANAlert.AutoSize = true;
+            this.labelIBANAlert.ForeColor = System.Drawing.Color.Red;
+            this.labelIBANAlert.Location = new System.Drawing.Point(104, 9);
+            this.labelIBANAlert.Name = "labelIBANAlert";
+            this.labelIBANAlert.Size = new System.Drawing.Size(112, 20);
+            this.labelIBANAlert.TabIndex = 9;
+            this.labelIBANAlert.Text = "IBAN not found";
+            this.labelIBANAlert.Visible = false;
+            // 
             // frmDeposit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 485);
+            this.Controls.Add(this.labelIBANAlert);
             this.Controls.Add(this.btnCalFee);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -284,5 +298,6 @@
         private Label label9;
         private Label label10;
         private Button btnCalFee;
+        private Label labelIBANAlert;
     }
 }

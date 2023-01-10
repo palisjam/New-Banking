@@ -1,4 +1,5 @@
 ﻿using Account;
+using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utility;
 
 namespace WindowsBanking
 {
@@ -23,20 +25,24 @@ namespace WindowsBanking
 
         private void frmDeposit_Load(object sender, EventArgs e)
         {
-            string msg;
-            _accountController.CreateTransaction(_transaction,out msg);
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-
-            Task<AccountModel> _account = _accountController.GetAccount(txtIBAN.Text);
-            AccountModel i = await _account;
-            txtFamilyName.Text = i.FamilyName;
-            txtGivenName.Text = i.GivenName;
-            txtEmail.Text = i.Email;
-            
-            
+            Task<AccountModel> _tAccount = _accountController.GetAccount(txtIBAN.Text);
+            AccountModel _account = await _tAccount;
+            txtFamilyName.Text = _account.FamilyName;
+            txtGivenName.Text = _account.GivenName;
+            txtEmail.Text = _account.Email;
+            if (!String.IsNullOrEmpty(_account.FamilyName) && !String.IsNullOrEmpty(_account.GivenName) && !String.IsNullOrEmpty(_account.Email))
+            {
+                txtGrossDeposit.ReadOnly = false;
+                labelIBANAlert.Visible= false;
+            } else
+            {
+                txtGrossDeposit.ReadOnly = true;
+                labelIBANAlert.Visible = true;
+            }
         }
 
         private void btnCalFee_Click(object sender, EventArgs e)
@@ -52,8 +58,16 @@ namespace WindowsBanking
             }
             else
             {
-                btnCalFee.Text = "Calculate Fee";
-                // Record transaction
+                string _msg;
+                _transaction.Destination = txtIBAN.Text;
+                _transaction.Amount = double.Parse(txtNetDeposit.Text);
+                _transaction.Type = (int)TransactionType.Type.DEPOSIT;
+                _transaction.Fee = double.Parse(txtFee.Text);
+                _transaction.Origin = "";
+                _transaction.Created = FieldValue.ServerTimestamp;
+
+                _accountController.CreateTransaction(_transaction, out _msg);
+                this.Dispose();
             }
         }
     }

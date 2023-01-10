@@ -37,7 +37,7 @@ namespace Account
         [FirestoreProperty]
         public int Type { get; set; }
         [FirestoreProperty]
-        public string Created { get; set;}
+        public object Created { get; set;}
     }
 
     public class Amount

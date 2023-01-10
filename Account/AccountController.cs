@@ -54,12 +54,6 @@ namespace Account
             try
             {
                 CollectionReference collection = _db.Collection("transaction");
-
-                if(_transactionData.Type == (int)TransactionType.Type.DEPOSIT)
-                {
-                    //_transactionData.Fee = GetFee(_transactionData.Amount);
-                    _transactionData.Amount = _transactionData.Amount - _transactionData.Fee;
-                }
                 collection.AddAsync(_transactionData);
                 msg = "Transaction successfully created";
             }

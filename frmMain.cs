@@ -14,7 +14,7 @@ namespace WindowsBanking
     public partial class frmMain : Form
     {
         Form createAccount = new frmCreateAccount();
-        Form deposit = new frmDeposit();
+        
         public frmMain()
         {
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace WindowsBanking
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
+            Form deposit = new frmDeposit();
             deposit.ShowDialog();
         }
     }
