@@ -27,8 +27,14 @@ namespace WindowsBanking
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
-            Form deposit = new frmDeposit();
-            deposit.ShowDialog();
+            Form _frmDeposit = new frmDeposit();
+            _frmDeposit.ShowDialog();
+        }
+
+        private void btnTransfer_Click(object sender, EventArgs e)
+        {
+            Form _frmTransfer = new frmTransfer();
+            _frmTransfer.ShowDialog();
         }
     }
 }
