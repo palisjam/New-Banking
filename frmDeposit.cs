@@ -43,10 +43,11 @@ namespace WindowsBanking
         {
             if (btnCalFee.Text == "Calculate Fee")
             {
+                Amount _amount;
                 double _gross = double.Parse(txtGrossDeposit.Text);
-                double _fee = _accountController.GetFee(_gross);
-                txtFee.Text = _fee.ToString();
-                txtNetDeposit.Text = (_gross - _fee).ToString();
+                _accountController.GetFee(_gross,out _amount);
+                txtFee.Text = _amount.Fee.ToString();
+                txtNetDeposit.Text = _amount.Net.ToString();
                 btnCalFee.Text = "Deposit";
             }
             else

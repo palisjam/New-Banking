@@ -39,4 +39,15 @@ namespace Account
         [FirestoreProperty]
         public string Created { get; set;}
     }
+
+    public class Amount
+    {
+        public double Net { get; set; }
+        public double Fee { get; set; }
+
+        public double Gross()
+        {
+            return Net + Fee;
+        }
+    }
 }

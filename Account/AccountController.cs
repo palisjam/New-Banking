@@ -57,7 +57,7 @@ namespace Account
 
                 if(_transactionData.Type == (int)TransactionType.Type.DEPOSIT)
                 {
-                    _transactionData.Fee = GetFee(_transactionData.Amount);
+                    //_transactionData.Fee = GetFee(_transactionData.Amount);
                     _transactionData.Amount = _transactionData.Amount - _transactionData.Fee;
                 }
                 collection.AddAsync(_transactionData);
@@ -69,9 +69,12 @@ namespace Account
             }
         }
 
-        public double GetFee(double amount)
+        public bool GetFee(double gross, out Amount _amount)
         {
-            return Math.Round(amount * Fee, 2);
+            _amount = new Amount();
+            _amount.Fee = Math.Round(gross * Fee, 2);
+            _amount.Net = gross-_amount.Fee;
+            return _amount.Net > 0;
 
         }
 
