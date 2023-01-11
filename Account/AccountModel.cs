@@ -40,6 +40,12 @@ namespace Account
         public object Created { get; set;}
     }
 
+    public class AccountSummaryModel
+    {
+        public string IBAN { get; set; }
+        public double Balance { get; set; }
+    }
+
     public class Amount
     {
         public double Net { get; set; }

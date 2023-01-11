@@ -29,20 +29,7 @@ namespace WindowsBanking
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            Task<AccountModel> _tAccount = _accountController.GetAccount(txtIBAN.Text);
-            AccountModel _account = await _tAccount;
-            txtFamilyName.Text = _account.FamilyName;
-            txtGivenName.Text = _account.GivenName;
-            txtEmail.Text = _account.Email;
-            if (!String.IsNullOrEmpty(_account.FamilyName) && !String.IsNullOrEmpty(_account.GivenName) && !String.IsNullOrEmpty(_account.Email))
-            {
-                txtGrossDeposit.ReadOnly = false;
-                labelIBANAlert.Visible= false;
-            } else
-            {
-                txtGrossDeposit.ReadOnly = true;
-                labelIBANAlert.Visible = true;
-            }
+            
         }
 
         private void btnCalFee_Click(object sender, EventArgs e)
@@ -61,13 +48,39 @@ namespace WindowsBanking
                 string _msg;
                 _transaction.Destination = txtIBAN.Text;
                 _transaction.Amount = double.Parse(txtNetDeposit.Text);
-                _transaction.Type = (int)TransactionType.Type.DEPOSIT;
+                _transaction.Type = (int)CONSTANT.TransactionType.Type.DEPOSIT;
                 _transaction.Fee = double.Parse(txtFee.Text);
                 _transaction.Origin = "";
-                _transaction.Created = FieldValue.ServerTimestamp;
 
                 _accountController.CreateTransaction(_transaction, out _msg);
                 this.Dispose();
+            }
+        }
+
+        private void txtGrossDeposit_TextChanged(object sender, EventArgs e)
+        {
+            btnCalFee.Text = "Calculate Fee";
+        }
+
+        private async void txtIBAN_TextChanged(object sender, EventArgs e)
+        {
+            if (txtIBAN.Text.Length == 18)
+            {
+                Task<AccountModel> _tAccount = _accountController.GetAccount(txtIBAN.Text);
+                AccountModel _account = await _tAccount;
+                txtFamilyName.Text = _account.FamilyName;
+                txtGivenName.Text = _account.GivenName;
+                txtEmail.Text = _account.Email;
+                if (!String.IsNullOrEmpty(_account.FamilyName) && !String.IsNullOrEmpty(_account.GivenName) && !String.IsNullOrEmpty(_account.Email))
+                {
+                    txtGrossDeposit.ReadOnly = false;
+                    labelIBANAlert.Visible = false;
+                }
+                else
+                {
+                    txtGrossDeposit.ReadOnly = true;
+                    labelIBANAlert.Visible = true;
+                }
             }
         }
     }

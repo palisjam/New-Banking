@@ -53,6 +53,7 @@ namespace Account
         {
             try
             {
+                _transactionData.Created= FieldValue.ServerTimestamp;
                 CollectionReference collection = _db.Collection("transaction");
                 collection.AddAsync(_transactionData);
                 msg = "Transaction successfully created";
@@ -66,7 +67,7 @@ namespace Account
         public bool GetFee(double gross, out Amount _amount)
         {
             _amount = new Amount();
-            _amount.Fee = Math.Round(gross * Fee, 2);
+            _amount.Fee = GeneralMethod.RoundUp(gross * Fee, 2);
             _amount.Net = gross-_amount.Fee;
             return _amount.Net > 0;
 
@@ -80,9 +81,51 @@ namespace Account
             if (snapshot.Exists)
             {
                 Dictionary<string, object> accDic = snapshot.ToDictionary();
-                _account.Set(accDic["FamilyName"].ToString(), accDic["GivenName"].ToString(), accDic["email"].ToString());
+                _account.Set(accDic["FamilyName"].ToString(), accDic["GivenName"].ToString(), accDic["Email"].ToString());
             }
             return _account;
+        }        
+
+        public async Task<double> GetBalance(string _iban)
+        {
+            AccountModel _account = new AccountModel();
+            TransactionModel _transaction = new TransactionModel();
+            double _amount = 0;
+
+            Query balanceQuery = _db.Collection("transaction").WhereEqualTo("Destination", _iban);
+            QuerySnapshot balanceQuerySnapshot = await balanceQuery.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in balanceQuerySnapshot.Documents)
+            {
+                Dictionary<string, object> tranDic = documentSnapshot.ToDictionary();
+                _amount += (double)tranDic["Amount"];
+            }
+
+            balanceQuery = _db.Collection("transaction").WhereEqualTo("Origin", _iban);
+            balanceQuerySnapshot = await balanceQuery.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in balanceQuerySnapshot.Documents)
+            {
+                Dictionary<string, object> tranDic = documentSnapshot.ToDictionary();
+                _amount -= (double)tranDic["Amount"];
+            }
+
+            return _amount;
+
+        }
+
+        public async Task<List<AccountSummaryModel>> GetAccountSummary()
+        {
+            List<AccountSummaryModel> _accSumList = new List<AccountSummaryModel> ();
+            AccountSummaryModel _accSum;
+            Query accountQuery = _db.Collection("account");
+            QuerySnapshot accountQuerySnapshot = await accountQuery.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in accountQuerySnapshot.Documents)
+            {
+                _accSum = new AccountSummaryModel();
+                _accSum.IBAN = documentSnapshot.Id;
+                _accSum.Balance = await GetBalance(_accSum.IBAN);
+                _accSumList.Add(_accSum);
+            }
+            return _accSumList;
         }
 
         public string ValidateIBAN(string _iban)

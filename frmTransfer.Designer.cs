@@ -33,7 +33,9 @@
             this.txtOriginGivenName = new System.Windows.Forms.TextBox();
             this.txtOriginEmail = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtOriginBalance = new System.Windows.Forms.TextBox();
             this.labelOriginIBANAlert = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,7 +50,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtDesFamilyName = new System.Windows.Forms.TextBox();
             this.txtDesGivenName = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTransAmount = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnTransfer = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +62,7 @@
             this.txtOriginIBAN.Location = new System.Drawing.Point(185, 37);
             this.txtOriginIBAN.Name = "txtOriginIBAN";
             this.txtOriginIBAN.Size = new System.Drawing.Size(269, 27);
-            this.txtOriginIBAN.TabIndex = 0;
+            this.txtOriginIBAN.TabIndex = 1;
             this.txtOriginIBAN.TextChanged += new System.EventHandler(this.txtOriginIBAN_TextChanged);
             // 
             // txtOriginFamilyName
@@ -87,7 +91,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtOriginBalance);
             this.groupBox1.Controls.Add(this.labelOriginIBANAlert);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -98,10 +104,19 @@
             this.groupBox1.Controls.Add(this.txtOriginGivenName);
             this.groupBox1.Location = new System.Drawing.Point(12, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 180);
+            this.groupBox1.Size = new System.Drawing.Size(574, 212);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Origin";
+            // 
+            // txtOriginBalance
+            // 
+            this.txtOriginBalance.Location = new System.Drawing.Point(185, 169);
+            this.txtOriginBalance.Name = "txtOriginBalance";
+            this.txtOriginBalance.ReadOnly = true;
+            this.txtOriginBalance.Size = new System.Drawing.Size(269, 27);
+            this.txtOriginBalance.TabIndex = 11;
+            this.txtOriginBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelOriginIBANAlert
             // 
@@ -113,6 +128,16 @@
             this.labelOriginIBANAlert.TabIndex = 10;
             this.labelOriginIBANAlert.Text = "IBAN not found";
             this.labelOriginIBANAlert.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(118, 172);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 20);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Balance";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -165,7 +190,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtDesFamilyName);
             this.groupBox2.Controls.Add(this.txtDesGivenName);
-            this.groupBox2.Location = new System.Drawing.Point(12, 209);
+            this.groupBox2.Location = new System.Drawing.Point(12, 269);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(574, 180);
             this.groupBox2.TabIndex = 4;
@@ -198,7 +223,7 @@
             this.txtDesIBAN.Location = new System.Drawing.Point(185, 37);
             this.txtDesIBAN.Name = "txtDesIBAN";
             this.txtDesIBAN.Size = new System.Drawing.Size(269, 27);
-            this.txtDesIBAN.TabIndex = 0;
+            this.txtDesIBAN.TabIndex = 2;
             this.txtDesIBAN.TextChanged += new System.EventHandler(this.txtDesIBAN_TextChanged);
             // 
             // label7
@@ -255,19 +280,43 @@
             this.txtDesGivenName.Size = new System.Drawing.Size(269, 27);
             this.txtDesGivenName.TabIndex = 2;
             // 
-            // textBox1
+            // txtTransAmount
             // 
-            this.textBox1.Location = new System.Drawing.Point(197, 416);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(269, 27);
-            this.textBox1.TabIndex = 5;
+            this.txtTransAmount.Location = new System.Drawing.Point(197, 465);
+            this.txtTransAmount.Name = "txtTransAmount";
+            this.txtTransAmount.Size = new System.Drawing.Size(269, 27);
+            this.txtTransAmount.TabIndex = 3;
+            this.txtTransAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTransAmount.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(75, 468);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 20);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Transfer amount";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnTransfer
+            // 
+            this.btnTransfer.Location = new System.Drawing.Point(275, 508);
+            this.btnTransfer.Name = "btnTransfer";
+            this.btnTransfer.Size = new System.Drawing.Size(94, 29);
+            this.btnTransfer.TabIndex = 4;
+            this.btnTransfer.Text = "Transfer";
+            this.btnTransfer.UseVisualStyleBackColor = true;
+            this.btnTransfer.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 563);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(600, 593);
+            this.Controls.Add(this.btnTransfer);
+            this.Controls.Add(this.txtTransAmount);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmTransfer";
@@ -302,8 +351,12 @@
         private Label label5;
         private TextBox txtDesFamilyName;
         private TextBox txtDesGivenName;
-        private TextBox textBox1;
+        private TextBox txtTransAmount;
         private Label labelOriginIBANAlert;
         private Label labelDesIBANAlert;
+        private TextBox txtOriginBalance;
+        private Label label9;
+        private Label label10;
+        private Button btnTransfer;
     }
 }

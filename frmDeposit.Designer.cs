@@ -30,7 +30,6 @@
         {
             this.txtIBAN = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,29 +53,20 @@
             // 
             // txtIBAN
             // 
-            this.txtIBAN.Location = new System.Drawing.Point(96, 30);
+            this.txtIBAN.Location = new System.Drawing.Point(156, 30);
             this.txtIBAN.Name = "txtIBAN";
             this.txtIBAN.Size = new System.Drawing.Size(377, 27);
             this.txtIBAN.TabIndex = 0;
+            this.txtIBAN.TextChanged += new System.EventHandler(this.txtIBAN_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 33);
+            this.label1.Location = new System.Drawing.Point(107, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "IBAN";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(479, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Verify";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -152,6 +142,7 @@
             this.txtGrossDeposit.Size = new System.Drawing.Size(369, 27);
             this.txtGrossDeposit.TabIndex = 4;
             this.txtGrossDeposit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtGrossDeposit.TextChanged += new System.EventHandler(this.txtGrossDeposit_TextChanged);
             // 
             // txtNetDeposit
             // 
@@ -239,7 +230,7 @@
             // 
             this.labelIBANAlert.AutoSize = true;
             this.labelIBANAlert.ForeColor = System.Drawing.Color.Red;
-            this.labelIBANAlert.Location = new System.Drawing.Point(104, 9);
+            this.labelIBANAlert.Location = new System.Drawing.Point(156, 7);
             this.labelIBANAlert.Name = "labelIBANAlert";
             this.labelIBANAlert.Size = new System.Drawing.Size(112, 20);
             this.labelIBANAlert.TabIndex = 9;
@@ -263,7 +254,6 @@
             this.Controls.Add(this.txtNetDeposit);
             this.Controls.Add(this.txtGrossDeposit);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtIBAN);
             this.Name = "frmDeposit";
@@ -280,7 +270,6 @@
 
         private TextBox txtIBAN;
         private Label label1;
-        private Button button1;
         private GroupBox groupBox1;
         private TextBox txtEmail;
         private TextBox txtGivenName;
